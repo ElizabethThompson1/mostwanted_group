@@ -17,7 +17,7 @@ function app(people) {
       searchResults = searchByName(people);
       break;
     case "no":
-      // TODO: search by traits
+      searchResults = searchByCriteria(people);
       break;
     default:
       app(people); // restart app
@@ -165,3 +165,17 @@ function autoValid(input) {
 function customValidation(input) {}
 
 //#endregion
+
+function searchByCriteria(people){
+  let firstCriteria =promptFor("Enter single search criteria.", autoValid);
+  let foundOnlyCriteria = people.filter(function(potentialMatch){
+    if 
+    (potentialMatch.firstCriteria === firstCriteria){
+      return true;
+    }
+    else {
+      return false;
+    }
+  });
+  return searchByCriteria;  
+}
