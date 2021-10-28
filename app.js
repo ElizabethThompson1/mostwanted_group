@@ -17,7 +17,11 @@ function app(people) {
       searchResults = searchByName(people);
       break;
     case "no":
-      searchResults = searchByCriteria(people);
+      searchResult = searchByMultiCriteria(people);
+      
+       // else if (..... = "multiple"){ 
+         // searchResults = searchByCriteria(people)
+
       break;
     default:
       app(people); // restart app
@@ -166,8 +170,15 @@ function customValidation(input) {}
 
 //#endregion
 
-function searchByCriteria(people){
-  let firstCriteria =promptFor("Enter single search criteria.", autoValid);
+function searchByCriteria(people) {
+  let searchResults;
+  let singleMulti=promptFor(
+    "Is it a single trait, Yes or No",
+  yesNo
+  ).toLowerCase();
+    if (singleMulti==="yes") {
+    
+      promptFor("Enter single search criteria.", autoValid);
   let foundOnlyCriteria = people.filter(function(potentialMatch){
     if 
     (potentialMatch.firstCriteria === firstCriteria){
@@ -177,5 +188,46 @@ function searchByCriteria(people){
       return false;
     }
   });
-  return searchByCriteria;  
+  return searchResults;  
+  }
+ 
+   else;
+   return mainMenu(person, people)
+   
+  }
+
+
+
+
+    // MULTI CRITERIA
+
+// try to add a multi funtion similar to single criteria. 
+function searchByMultiCriteria(people) {
+  let searchResults;
+  let singleMulti = promptFor(
+    "Do you know multiple traits, Yes or No?",
+    yesNo
+  ).toLowerCase();
+   let foundPerson = people.filter(function (potentialMatch){
+    if (singleMulti="yes") {
+        let firstSearch = promptFor("Enter criteria", autoValid);
+        if (potentialMatch.firstSearch === firstSearch){
+        
+            return true;
+          }
+          else 
+            return false;
+          
+        return searchResults;  }
+    }
+
+  else{
+      searchResult = searchByCriteria(people)
+  }
+
+ 
+
 }
+
+
+  
