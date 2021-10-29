@@ -205,29 +205,22 @@ function searchByCriteria(people) {
 function searchByMultiCriteria(people) {
   let searchResults;
   let singleMulti = promptFor(
-    "Do you know multiple traits, Yes or No?",
-    yesNo
-  ).toLowerCase();
-   let foundPerson = people.filter(function (potentialMatch){
-    if (singleMulti="yes") {
-        let firstSearch = promptFor("Enter criteria", autoValid);
-        if (potentialMatch.firstSearch === firstSearch){
-        
-            return true;
-          }
-          else 
-            return false;
-          
-        return searchResults;  }
+    "Do you know multiple traits, Yes or No",
+  yesNo
+  ).toLowerCase
+
+ let foundPerson = people.filter(function (potentialMatch) {
+   if (singleMulti = "yes") {
+     let firstSearch = promptFor("Enter criteria", autoValid);
+     if (potentialMatch.firstSearch===firstSearch) {
+      return true;
     }
-
-  else{
-      searchResult = searchByCriteria(people)
+    
+    }
+      else 
+      return false;
   }
-
- 
-
+    
+  )
+   searchResults =searchByCriteria
 }
-
-
-  
