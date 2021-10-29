@@ -173,7 +173,7 @@ function customValidation(input) {}
 function searchByCriteria(people) {
   let searchResults;
   let singleMulti=promptFor(
-    "Is it a single trait, Yes or No",
+    "Do you know a single criteria, Yes or No",
   yesNo
   ).toLowerCase();
     if (singleMulti==="yes") {
@@ -194,33 +194,36 @@ function searchByCriteria(people) {
    else;
    return mainMenu(person, people)
    
-  }
+ }
 
-
-
-
-    // MULTI CRITERIA
+ // MULTI CRITERIA
 
 // try to add a multi funtion similar to single criteria. 
 function searchByMultiCriteria(people) {
+
+
   let searchResults;
   let singleMulti = promptFor(
-    "Do you know multiple traits, Yes or No",
-  yesNo
-  ).toLowerCase
+    "Do you know multiple traits, Yes or No", yesNo).toLowerCase();
 
- let foundPerson = people.filter(function (potentialMatch) {
-   if (singleMulti = "yes") {
-     let firstSearch = promptFor("Enter criteria", autoValid);
-     if (potentialMatch.firstSearch===firstSearch) {
-      return true;
-    }
-    
-    }
-      else 
-      return false;
-  }
-    
-  )
-   searchResults =searchByCriteria
+
+ 
+    if (singleMulti === "yes") {
+    let foundPerson = people.filter(function (potentialMatch) {
+    let firstSearch = promptFor("Enter criteria", autoValid);
+      if (potentialMatch.firstSearch===firstSearch) {
+        return true;
+      }
+      
+      
+      else {
+        return false;}
+    });
+      return searchResults;
 }
+
+
+    else; {
+       searchResults =searchByCriteria(people)
+}
+}   
