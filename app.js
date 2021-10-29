@@ -178,7 +178,7 @@ function searchByCriteria(people) {
   ).toLowerCase();
     if (singleMulti==="yes") {
     
-      promptFor("Enter single search criteria.", autoValid);
+    let firstCriteria = promptFor("Enter single search criteria.", autoValid);
   let foundOnlyCriteria = people.filter(function(potentialMatch){
     if 
     (potentialMatch.firstCriteria === firstCriteria){
@@ -200,30 +200,27 @@ function searchByCriteria(people) {
 
 // try to add a multi funtion similar to single criteria. 
 function searchByMultiCriteria(people) {
-
-
   let searchResults;
   let singleMulti = promptFor(
     "Do you know multiple traits, Yes or No", yesNo).toLowerCase();
-
-
+    if (singleMulti === "yes"){
+      searchResults = singleMultiTwo(people)}
+    else; {
+    searchResults =searchByCriteria(people)
+}
  
-    if (singleMulti === "yes") {
-    let foundPerson = people.filter(function (potentialMatch) {
-    let firstSearch = promptFor("Enter criteria", autoValid);
-      if (potentialMatch.firstSearch===firstSearch) {
-        return true;
-      }
+
+
+function singleMultiTwo(people){
+  let firstSearch = promptFor("Enter multiple criterias", autoValid); 
+  let searchResults;
+     let foundOnlyCriteria = people.filter(function(potentialMatch){
       
+      if (potentialMatch.firstSearch===firstSearch) {
+        return true;}
       
       else {
         return false;}
     });
-      return searchResults;
-}
-
-
-    else; {
-       searchResults =searchByCriteria(people)
-}
-}   
+      return searchResults;}
+  }
