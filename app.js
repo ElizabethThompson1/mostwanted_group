@@ -17,7 +17,7 @@ function app(people) {
       searchResults = searchByName(people);
       break;
     case "no":
-      searchResult = searchByMultiCriteria(people);
+      searchResults = searchByMultiCriteria(people);
       
        // else if (..... = "multiple"){ 
          // searchResults = searchByCriteria(people)
@@ -201,14 +201,41 @@ function searchByCriteria(people) {
 // try to add a multi funtion similar to single criteria. 
 function searchByMultiCriteria(people) {
   let searchResults;
+  let newEyeColor=""
+  let newGender=""
+  let newHeight=""
+  let newWeight=""
+  let newDateOfBirth=""
   let singleMulti = promptFor(
     "Do you know multiple traits, Yes or No", yesNo).toLowerCase();
     if (singleMulti === "yes"){
-      searchResults = singleMultiTwo(people)}
-    else; {
+      newEyeColor = cycleThroughTraits("Eye Color")
+      newGender=cycleThroughTraits("gender")
+      newHeight=parseInt(cycleThroughTraits("height"))
+      newWeight=parseInt(cycleThroughTraits("weight"))
+      newDateOfBirth=cycleThroughTraits("Date of birth")
+     let ans= people.filter(function(potentialMatch){
+        if(
+    
+          (potentialMatch.eyeColor===newEyeColor || newEyeColor== "")&&
+        (potentialMatch.gender===newGender || newGender == "") &&
+        (potentialMatch.height===newHeight || newHeight == "") &&
+        (potentialMatch.weight===newWeight || newWeight == "") &&
+        (potentialMatch.dateOfBirth===newDateOfBirth || newDateOfBirth =="")
+        
+        )
+        return potentialMatch 
+      })
+      console.log(ans)
+    //showUsPerson(newEyeColor,newGender,newHeight,newWeight,newDateOfBirth)}
+    }else {
     searchResults =searchByCriteria(people)
 }
  
+function cycleThroughTraits(traits){
+ let newSearch=prompt("Enter "+ traits)
+ return newSearch
+}
 
 
 function singleMultiTwo(people){
