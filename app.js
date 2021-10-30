@@ -81,7 +81,7 @@ function mainMenu(person, people) {
 function searchByName(people) {
   let firstName = promptFor("What is the person's first name?", autoValid);
   let lastName = promptFor("What is the person's last name?", autoValid);
-
+  
   let foundPerson = people.filter(function (potentialMatch) {
     if (
       potentialMatch.firstName === firstName &&
@@ -91,10 +91,13 @@ function searchByName(people) {
     } else {
       return false;
     }
+    
   });
   // TODO: find the person single person object using the name they entered.
-  return foundPerson;
+  // return foundPerson;
+    return foundPerson
 }
+
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeColor(people) {}
@@ -169,37 +172,41 @@ function autoValid(input) {
 function customValidation(input) {}
 
 //#endregion
+function critieraVerification(){
+  let whenComplete = false;
+  while(whenComplete === false){
+    let question = prompt("do you know anymore criteria? yes or no?", autoValid);
+        if (question === "no"){ 
+            whenComplete = true;   
+         multiSearch(people)
+         }  
+        else {(question === "yes");
+            return mainMenu(person,people)
+      
+    }
+  }
+}
+
+
 
 function searchByCriteria(people) {
-  let searchResults;
-  let singleMulti=promptFor(
-    "Do you know a single criteria, Yes or No",
-  yesNo
-  ).toLowerCase();
-    if (singleMulti==="yes") {
-    
+  let singleMulti=promptFor( "Do you know a single criteria, Yes or No",yesNo).toLowerCase();
+  if (singleMulti==="yes") {
     let firstCriteria = promptFor("Enter single search criteria.", autoValid);
-  let foundOnlyCriteria = people.filter(function(potentialMatch){
-    if 
-    (potentialMatch.firstCriteria === firstCriteria){
-      return true;
-    }
+    let foundOnlyCriteria = people.filter(function(potentialMatch){
+    if(potentialMatch.firstCriteria === firstCriteria){
+        return true;}
     else {
-      return false;
+        return false;}
+    });
+    return foundOnlyCriteria
     }
-  });
-  return searchResults;  
-  }
- 
-   else;
-   return mainMenu(person, people)
-   
- }
+  else {
+   return mainMenu(person, people)}
+}
 
- // MULTI CRITERIA
-
-// try to add a multi funtion similar to single criteria. 
 function searchByMultiCriteria(people) {
+
   let searchResults;
   let newEyeColor=""
   let newGender=""
@@ -230,6 +237,15 @@ function searchByMultiCriteria(people) {
     //showUsPerson(newEyeColor,newGender,newHeight,newWeight,newDateOfBirth)}
     }else {
     searchResults =searchByCriteria(people)
+
+  let singleMulti = promptFor(
+    "Do you know multiple traits, Yes or No", yesNo).toLowerCase();
+    if (singleMulti === "yes"){
+      multiSearch(people)}
+    else; {
+    searchByCriteria(people)
+  }
+
 }
  
 function cycleThroughTraits(traits){
@@ -237,17 +253,4 @@ function cycleThroughTraits(traits){
  return newSearch
 }
 
-
-function singleMultiTwo(people){
-  let firstSearch = promptFor("Enter multiple criterias", autoValid); 
-  let searchResults;
-     let foundOnlyCriteria = people.filter(function(potentialMatch){
-      
-      if (potentialMatch.firstSearch===firstSearch) {
-        return true;}
-      
-      else {
-        return false;}
-    });
-      return searchResults;}
-  }
+}
