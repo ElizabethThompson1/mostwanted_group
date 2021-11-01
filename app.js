@@ -57,12 +57,15 @@ function mainMenu(person, people) {
   switch (displayOption) {
     case "info":
       // TODO: get person's info
+      displayInfo(personIndex)
       break;
     case "family":
       // TODO: get person's family
+      displayFamily(personIndex, people)
       break;
     case "descendants":
       // TODO: get person's descendants
+      displayDescendants(personIndex, people)
       break;
     case "restart":
       app(people); // restart
@@ -82,6 +85,75 @@ function mainMenu(person, people) {
 //#region
 
 //nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
+
+function displayInfo(personIndex){
+  let info = personIndex.firstName+" "+personIndex.lastName + "\n"
+  info += "Gender: "+personIndex.gender+"\n"
+  info += "DOB: "+personIndex.dob+"\n"
+  info += "Height: "+personIndex.height+"\n"
+  info += "Weight: "+personIndex.weight+"\n"
+  info += "Eye Color: "+personIndex.eyeColor+"\n"
+  info += "Occupation: "+personIndex.occupation
+
+  console.log(info)
+  alert(info)
+}
+
+function displayFamily(personIndex, person){
+  let info = personIndex.firstName+" "+personIndex.lastName + "\n"
+  info +=  "Parents: "
+ 
+  let parentsArray = getParentsArray(personIndex)
+
+
+
+  for(let i=0;i<person.length;i++){
+    if(parentsArray[0]===(person[i].id)){
+      info+=person[i].firstName + " " + person[i].lastName + "  " 
+    }
+  }
+  info += "\n Spouse: "
+
+  for(let i=0;i<person.length;i++){
+    if(person[i].id === personIndex.currentSpouse){
+      info+=person[i].firstName + " " + person[i].lastName + "  " 
+    }
+  }
+  info += "\n Siblings: "
+
+
+    for(let i=0;i<person.length;i++){
+      if(person[i].parents[0] === personIndex.parents[0] && person[i].id != personIndex.id){
+        info+=person[i].firstName + " " + person[i].lastName + "  " 
+      }
+}
+console.log(info)
+alert(info)
+}
+
+function displayDescendants(personIndex, person){
+  let info = personIndex.firstName+" "+personIndex.lastName + "\n"
+  info+="Descendants: "
+  for(let i=0;i<person.length;i++){
+    if(personIndex.id === person[i].parents[0]){
+      info+=person[i].firstName + " " + person[i].lastName + "  " 
+    }
+  }
+  console.log(info)
+  alert(info)
+
+}
+
+function getParentsArray(person){
+  let newArray = []
+  let array = person.parents
+  for(let i=0;i<array.length;i++){
+    newArray.push(parseInt(array[i]))
+  }
+  return newArray
+
+}
+
 function searchByName(people) {
   let firstName = promptFor("What is the person's first name?", autoValid);
   let lastName = promptFor("What is the person's last name?", autoValid);
