@@ -27,7 +27,7 @@ function app(people) {
       app(people); // restart app
       break;
   }
-
+//alert(searchResults)
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
 }
@@ -35,20 +35,24 @@ function app(people) {
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people) {
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
-
   if (!person) {
     alert("Could not find that individual.");
     return app(people); // restart
   }
 
+  let personIndex = choosePerson(person)
+
+
+
   let displayOption = promptFor(
     "Found " +
-      person.firstName +
+      personIndex.firstName +
       " " +
-      person.lastName +
+      personIndex.lastName +
       " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'",
     autoValid
   );
+
 
   switch (displayOption) {
     case "info":
@@ -192,7 +196,7 @@ function critieraVerification(){
 function searchByCriteria(people) {
   let singleMulti=promptFor( "Do you know a single criteria, Yes or No",yesNo).toLowerCase();
   if (singleMulti==="yes") {
-    let firstCriteria = promptFor("Enter gender,date of birth, heigh,weight,eye color, occupation, ", autoValid);
+    let firstCriteria = promptFor("Enter gender, dob, height, weight, eyeColor, occupation, ", autoValid);
     let specificTrait =prompt("Enter the "+firstCriteria)
     let foundOnlyCriteria = getSingleCriteria(people, firstCriteria, specificTrait)
   // let foundOnlyCriteria = people.filter(function(potentialMatch){
@@ -283,34 +287,54 @@ function searchByMultiCriteria(people) {
     
           (potentialMatch.eyeColor===newEyeColor || newEyeColor== "")&&
         (potentialMatch.gender===newGender || newGender == "") &&
-        (potentialMatch.height===newHeight || newHeight == "") &&
-        (potentialMatch.weight===newWeight || newWeight == "") &&
+        (potentialMatch.height===newHeight || newHeight == "" || isNaN(newHeight)) &&
+        (potentialMatch.weight===newWeight || newWeight == "" || isNaN(newWeight)) &&
         (potentialMatch.dateOfBirth===newDateOfBirth || newDateOfBirth =="")
         
         )
         return potentialMatch 
       })
-      alert(ans)
+
+      searchResults = ans
     //showUsPerson(newEyeColor,newGender,newHeight,newWeight,newDateOfBirth)}
     //need to be sent to main menu 
     }else {
     searchResults =searchByCriteria(people)
 
-  let singleMulti = promptFor(
-    "Do you know multiple traits, Yes or No", yesNo).toLowerCase();
-    if (singleMulti === "yes"){
-      multiSearch(people)}
-    else; {
-    searchByCriteria(people)
-  }
+
+  // let singleMulti = promptFor(
+  //   "Do you know multiple traits, Yes or No", yesNo).toLowerCase();
+  //   if (singleMulti === "yes"){
+  //     multiSearch(people)}
+  //   else; {
+  //   searchByCriteria(people)
+  // }
 
 }
+return searchResults
+
+}
+
+function choosePerson(foundOnlyCriteria){
+  let newDialog = dialog(foundOnlyCriteria)
+  let response = prompt("Which person do you want to choose?\n"+newDialog)
+  return foundOnlyCriteria[response-1]
+  
+}
+
+function dialog(foundOnlyCriteria){
+  let newDialog=""
+  for(let i= 0; i<foundOnlyCriteria.length; i++){
+    newDialog +=((i+1)+". "+foundOnlyCriteria[i].firstName+ " "+foundOnlyCriteria[i].lastName + "\n")
+  }
+  return newDialog
+}
+
  
 function cycleThroughTraits(traits){
  let newSearch=prompt("Enter "+ traits)
  return newSearch
 }
 
-}
 //the final answers need to be sent to the main menu to be shot back at the do you know the name function
 //for descendents it need to grab the answers form both multi or single critiea and all people that have similarities
