@@ -192,8 +192,8 @@ function critieraVerification(){
 function searchByCriteria(people) {
   let singleMulti=promptFor( "Do you know a single criteria, Yes or No",yesNo).toLowerCase();
   if (singleMulti==="yes") {
-    let firstCriteria = promptFor("Enter single search criteria.", autoValid);
-    let specificTrait =prompt("Enter the person's "+firstCriteria)
+    let firstCriteria = promptFor("Enter gender,date of birth, heigh,weight,eye color, occupation, ", autoValid);
+    let specificTrait =prompt("Enter the "+firstCriteria)
     let foundOnlyCriteria = getSingleCriteria(people, firstCriteria, specificTrait)
   // let foundOnlyCriteria = people.filter(function(potentialMatch){
   //   if(potentialMatch.firstCriteria === specificTrait){
@@ -201,7 +201,7 @@ function searchByCriteria(people) {
   //   else {
   //       return false;}
   //   });
-     console.log(foundOnlyCriteria)
+     alert(foundOnlyCriteria)
      return foundOnlyCriteria
     }
   else {
@@ -211,28 +211,7 @@ function searchByCriteria(people) {
 
 function getSingleCriteria(people, firstCriteria, specificTrait){
   let foundOnlyCriteria;
-  if(firstCriteria == "id"){
-    foundOnlyCriteria = people.filter(function(potentialMatch){
-      if(potentialMatch.id === specificTrait){
-          return true;}
-      else {
-          return false;}
-      });
-  }else if(firstCriteria == "firstName"){
-    foundOnlyCriteria = people.filter(function(potentialMatch){
-      if(potentialMatch.firstName === specificTrait){
-          return true;}
-      else {
-          return false;}
-      });
-  }else if(firstCriteria == "lastName"){
-    foundOnlyCriteria = people.filter(function(potentialMatch){
-      if(potentialMatch.lastName === specificTrait){
-          return true;}
-      else {
-          return false;}
-      });
-  }else if(firstCriteria == "gender"){
+   if(firstCriteria == "gender"){
     foundOnlyCriteria = people.filter(function(potentialMatch){
       if(potentialMatch.gender === specificTrait){
           return true;}
@@ -274,13 +253,6 @@ function getSingleCriteria(people, firstCriteria, specificTrait){
       else {
           return false;}
       });
-  }else if(firstCriteria == "currentSpouse"){
-    foundOnlyCriteria = people.filter(function(potentialMatch){
-      if(potentialMatch.currentSpouse === specificTrait){
-          return true;}
-      else {
-          return false;}
-      });
   }
 return foundOnlyCriteria
 
@@ -318,8 +290,9 @@ function searchByMultiCriteria(people) {
         )
         return potentialMatch 
       })
-      console.log(ans)
+      alert(ans)
     //showUsPerson(newEyeColor,newGender,newHeight,newWeight,newDateOfBirth)}
+    //need to be sent to main menu 
     }else {
     searchResults =searchByCriteria(people)
 
@@ -339,3 +312,5 @@ function cycleThroughTraits(traits){
 }
 
 }
+//the final answers need to be sent to the main menu to be shot back at the do you know the name function
+//for descendents it need to grab the answers form both multi or single critiea and all people that have similarities
