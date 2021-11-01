@@ -193,17 +193,102 @@ function searchByCriteria(people) {
   let singleMulti=promptFor( "Do you know a single criteria, Yes or No",yesNo).toLowerCase();
   if (singleMulti==="yes") {
     let firstCriteria = promptFor("Enter single search criteria.", autoValid);
-    let foundOnlyCriteria = people.filter(function(potentialMatch){
-    if(potentialMatch.firstCriteria === firstCriteria){
-        return true;}
-    else {
-        return false;}
-    });
-    return foundOnlyCriteria
+    let specificTrait =prompt("Enter the person's "+firstCriteria)
+    let foundOnlyCriteria = getSingleCriteria(people, firstCriteria, specificTrait)
+  // let foundOnlyCriteria = people.filter(function(potentialMatch){
+  //   if(potentialMatch.firstCriteria === specificTrait){
+  //       return true;}
+  //   else {
+  //       return false;}
+  //   });
+     console.log(foundOnlyCriteria)
+     return foundOnlyCriteria
     }
   else {
    return mainMenu(person, people)}
 }
+
+
+function getSingleCriteria(people, firstCriteria, specificTrait){
+  let foundOnlyCriteria;
+  if(firstCriteria == "id"){
+    foundOnlyCriteria = people.filter(function(potentialMatch){
+      if(potentialMatch.id === specificTrait){
+          return true;}
+      else {
+          return false;}
+      });
+  }else if(firstCriteria == "firstName"){
+    foundOnlyCriteria = people.filter(function(potentialMatch){
+      if(potentialMatch.firstName === specificTrait){
+          return true;}
+      else {
+          return false;}
+      });
+  }else if(firstCriteria == "lastName"){
+    foundOnlyCriteria = people.filter(function(potentialMatch){
+      if(potentialMatch.lastName === specificTrait){
+          return true;}
+      else {
+          return false;}
+      });
+  }else if(firstCriteria == "gender"){
+    foundOnlyCriteria = people.filter(function(potentialMatch){
+      if(potentialMatch.gender === specificTrait){
+          return true;}
+      else {
+          return false;}
+      });
+  }else if(firstCriteria == "dob"){
+    foundOnlyCriteria = people.filter(function(potentialMatch){
+      if(potentialMatch.dob === specificTrait){
+          return true;}
+      else {
+          return false;}
+      });
+  }else if(firstCriteria == "height"){
+    foundOnlyCriteria = people.filter(function(potentialMatch){
+      if(potentialMatch.height === parseInt(specificTrait)){
+          return true;}
+      else {
+          return false;}
+      });
+  }else if(firstCriteria == "weight"){
+    foundOnlyCriteria = people.filter(function(potentialMatch){
+      if(potentialMatch.weight === parseInt(specificTrait)){
+          return true;}
+      else {
+          return false;}
+      });
+  }else if(firstCriteria == "eyeColor"){
+    foundOnlyCriteria = people.filter(function(potentialMatch){
+      if(potentialMatch.eyeColor === specificTrait){
+          return true;}
+      else {
+          return false;}
+      });
+  }else if(firstCriteria == "occupation"){
+    foundOnlyCriteria = people.filter(function(potentialMatch){
+      if(potentialMatch.occupation === specificTrait){
+          return true;}
+      else {
+          return false;}
+      });
+  }else if(firstCriteria == "currentSpouse"){
+    foundOnlyCriteria = people.filter(function(potentialMatch){
+      if(potentialMatch.currentSpouse === specificTrait){
+          return true;}
+      else {
+          return false;}
+      });
+  }
+return foundOnlyCriteria
+
+}
+
+
+
+
 
 function searchByMultiCriteria(people) {
 
